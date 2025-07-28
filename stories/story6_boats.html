@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story 6: Boats - Read Naturally</title>
+  <link rel="stylesheet" href="../../../css/styles.css">
+  <style>
+    /* Story-specific styles */
+    .story-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    
+    .story-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .story-title {
+      font-size: 28px;
+      color: var(--primary-color);
+      margin: 15px 0;
+    }
+    
+    .story-image {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Audio Player Styles */
+    .audio-player {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .player-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .track-selector {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .track-display {
+      background-color: #fff;
+      padding: 8px 15px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      min-width: 200px;
+    }
+    
+    .track-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      display: none;
+    }
+    
+    .track-dropdown.active {
+      display: block;
+    }
+    
+    .track-option {
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+    
+    .track-option:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .play-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    
+    .play-button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .progress-container {
+      width: 100%;
+    }
+    
+    .time-display {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .progress-bar {
+      height: 6px;
+      background-color: #ddd;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: var(--primary-color);
+      width: 0%;
+      border-radius: 3px;
+    }
+    
+    .volume-control {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+    }
+    
+    .volume-icon {
+      margin-right: 10px;
+      color: #666;
+    }
+    
+    .volume-bar {
+      height: 4px;
+      background-color: #ddd;
+      border-radius: 2px;
+      overflow: hidden;
+      width: 100px;
+      position: relative;
+    }
+    
+    .volume-fill {
+      height: 100%;
+      background-color: #666;
+      width: 75%;
+      border-radius: 2px;
+    }
+
+    .volume-thumb {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    /* Tabs Styles */
+    .tabs-container {
+      margin-bottom: 30px;
+    }
+    
+    .tabs-nav {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .tab-button {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #666;
+    }
+    
+    .tab-button.active {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .tab-content {
+      padding: 20px 0;
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    /* Vocabulary Styles */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+    }
+    
+    .vocab-button {
+      background-color: #f5f5f5;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .vocab-button:hover {
+      background-color: #e9e9e9;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      display: none;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 500px;
+      width: 90%;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .modal-title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+    
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #888;
+    }
+    
+    .modal-body {
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    
+    .modal-footer {
+      text-align: center;
+    }
+    
+    .got-it-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    
+    .got-it-button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .read-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .read-button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    /* Story Navigation */
+    .story-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    
+    .nav-button {
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .prev-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+    }
+    
+    .prev-button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .next-button {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+    }
+    
+    .next-button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    /* Quiz Styles */
+    .quiz-container {
+      text-align: center;
+    }
+    
+    .quiz-start {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    
+    .quiz-start:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    /* Notes Styles */
+    .notes-container {
+      background-color: #fff9e6;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    
+    .notes-textarea {
+      width: 100%;
+      height: 150px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: inherit;
+      resize: vertical;
+    }
+    
+    .save-notes {
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    
+    .save-notes:hover {
+      background-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="logo">Read Naturally</h1>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="../../../index.html" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="../../../levels.html" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                </svg>
+                Levels
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Story Container -->
+      <div class="story-container">
+
+        <div class="story-image-container">
+          <img src="../../../images/stories/boats.jpeg" alt="Boats Cover" class="story-image">
+        </div>
+        <h2 class="page-title" style="margin-bottom: 20px;">Story 6: Boats</h2>
+        <!-- Audio Player -->
+        <div class="audio-player">
+          <div class="player-controls">
+            <div class="track-selector">
+              <div class="track-display" id="trackDisplay">
+                <span id="currentTrack">Choose A Track Below</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px;">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+              <div class="track-dropdown" id="trackDropdown">
+                <div class="track-option" data-file="story6_boats_keywords.mp3">Keywords</div>
+                <div class="track-option" data-file="story6_boats_part1.mp3">Read Aloud 1</div>
+                <div class="track-option" data-file="story6_boats_part2.mp3">Read Aloud 2</div>
+                <div class="track-option" data-file="story6_boats_part3.mp3">Read Aloud 3</div>
+                <div class="track-option" data-file="story6_boats_spanish.mp3">Read Aloud (Spanish)</div>
+              </div>
+            </div>
+            
+            <button class="play-button" id="playButton">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="playIcon">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="pauseIcon" style="display: none;">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="progress-container">
+            <div class="time-display">
+              <span id="currentTime">0:00</span>
+              <span id="duration">0:00</span>
+            </div>
+            <div class="progress-bar" id="progressBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+          
+          <!-- Hidden audio element -->
+          <audio id="audioElement" preload="auto">
+            <source id="audioSource" src="../../../media/level1_0/story6_boats/story6_boats_part1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        
+        <!-- Content Tabs -->
+        <div class="tabs-container">
+          <div class="tabs-nav">
+            <button class="tab-button active" data-tab="vocabulary">Vocabulary</button>
+            <button class="tab-button" data-tab="quiz">Quiz</button>
+            <button class="tab-button" data-tab="notes">Notes</button>
+          </div>
+          
+          <!-- Vocabulary Tab -->
+          <div class="tab-content active" id="vocabularyTab">
+            <div class="vocab-grid">
+              <button class="vocab-button" data-word="Motor" data-definition="A motor is a machine that makes things work or go."><span>Motor</span></button>
+              <button class="vocab-button" data-word="Oars" data-definition="Oars are poles with flat ends that people use to move boats through water."><span>Oars</span></button>
+              <button class="vocab-button" data-word="Row" data-definition="When you row, you use oars to make a boat go."><span>Row</span></button>
+              <button class="vocab-button" data-word="Sails" data-definition="Sails are cloths that catch the wind to move a boat."><span>Sails</span></button>
+              <button class="vocab-button" data-word="Wind" data-definition="Wind is moving air."><span>Wind</span></button>
+            </div>
+          </div>
+          
+          <!-- Quiz Tab -->
+          <div class="tab-content" id="quizTab">
+            <div class="quiz-container">
+              <p>Click the button below to begin the quiz about Boats.</p>
+              <button class="quiz-start">Start Quiz</button>
+            </div>
+          </div>
+          
+          <!-- Notes Tab -->
+          <div class="tab-content" id="notesTab">
+            <div class="notes-container">
+              <textarea class="notes-textarea" placeholder="Take notes about this story here..." id="storyNotes"></textarea>
+              <button class="save-notes" id="saveNotes">Save Notes</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Story Navigation -->
+        <div class="story-navigation">
+          <button class="nav-button prev-button" id="prevStory">
+            Previous Story: Fish
+          </button>
+          <button class="nav-button next-button" id="nextStory">
+            Next Story: Horses
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Vocabulary Modal -->
+  <div class="modal-overlay" id="vocabModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalWord" style="text-align: center;">Word</h3>
+      </div>
+      <div class="modal-body">
+        <p id="modalDefinition">Definition will appear here.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="read-button" id="readForMeButton">Listen</button>
+        <button class="got-it-button" id="gotItButton">Got It!</button>
+        <audio id="vocabAudio" preload="auto"></audio>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const trackDisplay = document.getElementById('trackDisplay');
+    const trackDropdown = document.getElementById('trackDropdown');
+    const trackOptions = document.querySelectorAll('.track-option');
+    const currentTrackDisplay = document.getElementById('currentTrack');
+    const playButton = document.getElementById('playButton');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const durationDisplay = document.getElementById('duration');
+    const audioElement = document.getElementById('audioElement');
+    const audioSource = document.getElementById('audioSource');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const vocabButtons = document.querySelectorAll('.vocab-button');
+    const vocabModal = document.getElementById('vocabModal');
+    const modalWord = document.getElementById('modalWord');
+    const modalDefinition = document.getElementById('modalDefinition');
+    const closeModal = document.getElementById('closeModal');
+    const gotItButton = document.getElementById('gotItButton');
+    const storyNotes = document.getElementById('storyNotes');
+    const saveNotes = document.getElementById('saveNotes');
+    const prevStory = document.getElementById('prevStory');
+    const nextStory = document.getElementById('nextStory');
+    
+    // Toggle track dropdown
+    trackDisplay.addEventListener('click', function() {
+      trackDropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!trackDisplay.contains(event.target) && !trackDropdown.contains(event.target)) {
+        trackDropdown.classList.remove('active');
+      }
+    });
+    
+    // Select track
+    trackOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const trackFile = this.getAttribute('data-file');
+        if (!trackFile) {
+          // Just update the display text and close dropdown, no audio to load
+          currentTrackDisplay.textContent = this.textContent;
+          trackDropdown.classList.remove('active');
+          return;
+        }
+        currentTrackDisplay.textContent = this.textContent;
+        audioSource.src = `../../../media/level1_0/story6_boats/${trackFile}`;
+        audioElement.load();
+        trackDropdown.classList.remove('active');
+        
+        // Reset UI
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+        progressFill.style.width = '0%';
+        currentTimeDisplay.textContent = '0:00';
+      });
+    });
+    
+    // Play/Pause toggle
+    playButton.addEventListener('click', function() {
+      if (audioElement.paused) {
+        audioElement.play()
+          .then(() => {
+            pauseIcon.style.display = 'block';
+            playIcon.style.display = 'none';
+          })
+          .catch(error => {
+            console.error('Error playing audio:', error);
+            alert('Error playing audio. Please check your connection or try another track.');
+          });
+      } else {
+        audioElement.pause();
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+      }
+    });
+    
+    // Update time and progress
+    audioElement.addEventListener('timeupdate', function() {
+      // Update current time display
+      const currentTime = audioElement.currentTime;
+      const minutes = Math.floor(currentTime / 60);
+      const seconds = Math.floor(currentTime % 60);
+      currentTimeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      
+      // Update progress bar
+      const progress = (currentTime / audioElement.duration) * 100;
+      progressFill.style.width = `${progress}%`;
+    });
+    
+    // Set time on progress bar click
+    progressBar.addEventListener('click', function(event) {
+      const boundingRect = this.getBoundingClientRect();
+      const clickPosition = event.clientX - boundingRect.left;
+      const barWidth = boundingRect.width;
+      const percentage = clickPosition / barWidth;
+      
+      audioElement.currentTime = percentage * audioElement.duration;
+    });
+    
+    // Update duration when metadata is loaded
+    audioElement.addEventListener('loadedmetadata', function() {
+      const duration = audioElement.duration;
+      const minutes = Math.floor(duration / 60);
+      const seconds = Math.floor(duration % 60);
+      durationDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    });
+    
+    // Handle end of audio
+    audioElement.addEventListener('ended', function() {
+      pauseIcon.style.display = 'none';
+      playIcon.style.display = 'block';
+      progressFill.style.width = '0%';
+      audioElement.currentTime = 0;
+    });
+    
+    
+    // Tab switching
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        
+        // Update active tab button
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update active tab content
+        tabContents.forEach(content => content.classList.remove('active'));
+        document.getElementById(`${tabId}Tab`).classList.add('active');
+      });
+    });
+    
+    // Vocabulary audio element
+    const vocabAudio = document.getElementById('vocabAudio');
+    // Vocabulary buttons
+    vocabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const word = this.getAttribute('data-word');
+        const definition = this.getAttribute('data-definition');
+
+        modalWord.textContent = word;
+        modalDefinition.textContent = definition;
+        vocabModal.classList.add('active');
+        // Generate vocab audio file name - removes spaces, lowercases
+        const audioFileName = `story6_boats_definition_${word.toLowerCase().replace(/\s/g, '')}.mp3`;
+        vocabAudio.src = `../../../media/level1_0/story6_boats/${audioFileName}`;
+      });
+    });
+    
+    // Close modal
+    function closeVocabModal() {
+      vocabModal.classList.remove('active');
+      vocabAudio.pause();
+      vocabAudio.currentTime = 0;
+    }
+    
+    // Ensure "Got It!" button closes the modal
+    if (gotItButton) {
+      gotItButton.addEventListener('click', closeVocabModal);
+    }
+    
+    // "Read for me" button functionality
+    const readForMeButton = document.getElementById('readForMeButton');
+    readForMeButton.addEventListener('click', function() {
+      if (vocabAudio.src) {
+        vocabAudio.play();
+      }
+    });
+    
+    // Close modal when clicking outside
+    vocabModal.addEventListener('click', function(event) {
+      if (event.target === vocabModal) {
+        closeVocabModal();
+      }
+    });
+    
+    // Notes functionality
+    // Load saved notes if any
+    const storyId = 'story6_boats';
+    storyNotes.value = localStorage.getItem(`notes_${storyId}`) || '';
+    
+    // Save notes
+    saveNotes.addEventListener('click', function() {
+      localStorage.setItem(`notes_${storyId}`, storyNotes.value);
+      alert('Notes saved successfully!');
+    });
+    
+    // Navigation
+    prevStory.addEventListener('click', function() {
+      window.location.href = 'story5_fish.html';
+    });
+    nextStory.addEventListener('click', function() {
+      window.location.href = 'story7_horses.html';
+    });
+    
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(event) {
+      // Spacebar for play/pause
+      if (event.code === 'Space' && document.activeElement !== storyNotes) {
+        event.preventDefault();
+        playButton.click();
+      }
+      
+      // Esc key to close modal
+      if (event.code === 'Escape' && vocabModal.classList.contains('active')) {
+        closeVocabModal();
+      }
+    });
+  </script>
+</body>
+</html>
