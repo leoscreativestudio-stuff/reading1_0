@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Story 1: Pink Lakes - Read Naturally</title>
-  <link rel="stylesheet" href="../../../css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
     /* Story-specific styles */
     .story-container {
@@ -608,7 +608,7 @@
           return;
         }
         currentTrackDisplay.textContent = this.textContent;
-        audioSource.src = `../../../media/level1_0/story1_pinklakes/${trackFile}`;
+        audioSource.src = `../media/story1_pinklakes/${trackFile}`;
         audioElement.load();
         trackDropdown.classList.remove('active');
         
@@ -710,7 +710,7 @@
         if (word === 'Salt Water') {
           audioFileName = 'story1_pinklakes_definition_saltwater.mp3';
         }
-        vocabAudio.src = `../../../media/level1_0/story1_pinklakes/${audioFileName}`;
+        vocabAudio.src = `../media/story1_pinklakes/${audioFileName}`;
       });
     });
     
@@ -768,4 +768,5 @@
     });
   </script>
 </body>
+  <script src="../js/main.js"></script>
 </html>
