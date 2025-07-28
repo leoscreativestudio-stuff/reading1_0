@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Story 23: Bikes - Read Naturally</title>
-  <link rel="stylesheet" href="../../../css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
     /* Story-specific styles */
     .story-container {
@@ -334,7 +334,7 @@
     }
     
     .prev-button:hover {
-      background-color: var(--primary-dark);
+      background-color: #e5e5e5;
     }
     
     .next-button {
@@ -401,35 +401,7 @@
   </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header class="header">
-    <div class="container">
-      <div class="header-content">
-        <h1 class="logo">Read Naturally</h1>
-        <nav class="main-nav">
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a href="../../../index.html" class="nav-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-                Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../../../levels.html" class="nav-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                </svg>
-                Levels
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+  <!-- Main Content Section -->
 
   <!-- Main Content Section -->
   <main class="main-content">
@@ -438,7 +410,7 @@
       <div class="story-container">
 
         <div class="story-image-container">
-          <img src="../../../images/stories/bikes.jpeg" alt="Bikes Cover" class="story-image">
+          <img src="../images/bikes.jpeg" alt="Bikes Cover" class="story-image">
         </div>
         <h2 class="page-title" style="margin-bottom: 20px;">Story 23: Bikes</h2>
         <!-- Audio Player -->
@@ -451,15 +423,14 @@
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </div>
-              <div class="track-dropdown" id="trackDropdown">
-                <div class="track-option" data-file="story23_bikes_keywords.mp3">Keywords</div>
-                <div class="track-option" data-file="story23_bikes_part1.mp3">Read Aloud 1</div>
-                <div class="track-option" data-file="story23_bikes_part2.mp3">Read Aloud 2</div>
-                <div class="track-option" data-file="story23_bikes_part3.mp3">Read Aloud 3</div>
-                <div class="track-option" data-file="story23_bikes_spanish.mp3">Read Aloud (Spanish)</div>
-              </div>
+            <div class="track-dropdown" id="trackDropdown">
+              <div class="track-option" data-file="story23_bikes_keywords.mp3">Keywords</div>
+              <div class="track-option" data-file="story23_bikes_part1.mp3">Read Aloud 1</div>
+              <div class="track-option" data-file="story23_bikes_part2.mp3">Read Aloud 2</div>
+              <div class="track-option" data-file="story23_bikes_part3.mp3">Read Aloud 3</div>
+              <div class="track-option" data-file="story23_bikes_spanish.mp3">Read Aloud (Spanish)</div>
             </div>
-            
+            </div>
             <button class="play-button" id="playButton">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="playIcon">
                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -470,7 +441,6 @@
               </svg>
             </button>
           </div>
-          
           <div class="progress-container">
             <div class="time-display">
               <span id="currentTime">0:00</span>
@@ -480,10 +450,9 @@
               <div class="progress-fill" id="progressFill"></div>
             </div>
           </div>
-          
           <!-- Hidden audio element -->
           <audio id="audioElement" preload="auto">
-            <source id="audioSource" src="../../../media/level1_0/story23_bikes/story23_bikes_part1.mp3" type="audio/mpeg">
+            <source id="audioSource" src="../media/story23_bikes/story23_bikes_part1.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -492,45 +461,24 @@
         <div class="tabs-container">
           <div class="tabs-nav">
             <button class="tab-button active" data-tab="vocabulary">Vocabulary</button>
-            <button class="tab-button" data-tab="quiz">Quiz</button>
-            <button class="tab-button" data-tab="notes">Notes</button>
           </div>
           
           <!-- Vocabulary Tab -->
           <div class="tab-content active" id="vocabularyTab">
             <div class="vocab-grid">
-              <button class="vocab-button" data-word="Lake" data-definition="A lake is a body of water with land all around it."><span>Lake</span></button>
-              <button class="vocab-button" data-word="Park" data-definition="A park is a place outside where people go to have fun."><span>Park</span></button>
-              <button class="vocab-button" data-word="Pedals" data-definition="Pedals are things you push with your feet."><span>Pedals</span></button>
-              <button class="vocab-button" data-word="Place" data-definition="A place is where you can go or be."><span>Place</span></button>
+  <button class="vocab-button" data-word="Lake" data-definition="A lake is a body of water with land all around it."><span>Lake</span></button>
+  <button class="vocab-button" data-word="Pedals" data-definition="Pedals are things you push with your feet."><span>Pedals</span></button>
+  <button class="vocab-button" data-word="Park" data-definition="A park is a place outside where people go to have fun."><span>Park</span></button>
+  <button class="vocab-button" data-word="Place" data-definition="A place is where you can go or be."><span>Place</span></button>
             </div>
           </div>
           
-          <!-- Quiz Tab -->
-          <div class="tab-content" id="quizTab">
-            <div class="quiz-container">
-              <p>Click the button below to begin the quiz about Bikes.</p>
-              <button class="quiz-start">Start Quiz</button>
-            </div>
-          </div>
-          
-          <!-- Notes Tab -->
-          <div class="tab-content" id="notesTab">
-            <div class="notes-container">
-              <textarea class="notes-textarea" placeholder="Take notes about this story here..." id="storyNotes"></textarea>
-              <button class="save-notes" id="saveNotes">Save Notes</button>
-            </div>
-          </div>
         </div>
         
         <!-- Story Navigation -->
         <div class="story-navigation">
-          <button class="nav-button prev-button" id="prevStory">
-            Previous Story: Stars
-          </button>
-          <button class="nav-button next-button" id="nextStory">
-            Next Story: Trucks
-          </button>
+          <button class="nav-button prev-button" id="prevStory">Previous Story: Stars</button>
+          <button class="nav-button next-button" id="nextStory">Next Story: Trucks</button>
         </div>
       </div>
     </div>
@@ -576,8 +524,6 @@
     const modalDefinition = document.getElementById('modalDefinition');
     const closeModal = document.getElementById('closeModal');
     const gotItButton = document.getElementById('gotItButton');
-    const storyNotes = document.getElementById('storyNotes');
-    const saveNotes = document.getElementById('saveNotes');
     const prevStory = document.getElementById('prevStory');
     const nextStory = document.getElementById('nextStory');
     
@@ -604,10 +550,9 @@
           return;
         }
         currentTrackDisplay.textContent = this.textContent;
-        audioSource.src = `../../../media/level1_0/story23_bikes/${trackFile}`;
+        audioSource.src = `../media/story23_bikes/${trackFile}`;
         audioElement.load();
         trackDropdown.classList.remove('active');
-        
         // Reset UI
         pauseIcon.style.display = 'none';
         playIcon.style.display = 'block';
@@ -697,13 +642,12 @@
       button.addEventListener('click', function() {
         const word = this.getAttribute('data-word');
         const definition = this.getAttribute('data-definition');
-
         modalWord.textContent = word;
         modalDefinition.textContent = definition;
         vocabModal.classList.add('active');
-        // Generate vocab audio file name - removes spaces (including multiple), lowercases
-        const audioFileName = `story23_bikes_definition_${word.toLowerCase().replace(/\s+/g, '')}.mp3`;
-        vocabAudio.src = `../../../media/level1_0/story23_bikes/${audioFileName}`;
+        // For Bikes, use lowercase and replace spaces and special characters for filenames
+        let safeWord = word.toLowerCase().replace(/[^a-z0-9]+/g, '');
+        vocabAudio.src = `../media/story23_bikes/story23_bikes_definition_${safeWord}.mp3`;
       });
     });
     
@@ -734,16 +678,6 @@
       }
     });
     
-    // Notes functionality
-    // Load saved notes if any
-    const storyId = 'story23_bikes';
-    storyNotes.value = localStorage.getItem(`notes_${storyId}`) || '';
-    
-    // Save notes
-    saveNotes.addEventListener('click', function() {
-      localStorage.setItem(`notes_${storyId}`, storyNotes.value);
-      alert('Notes saved successfully!');
-    });
     
     // Navigation
     prevStory.addEventListener('click', function() {
@@ -757,11 +691,16 @@
     // Keyboard shortcuts
     document.addEventListener('keydown', function(event) {
       // Spacebar for play/pause
-      if (event.code === 'Space' && document.activeElement !== storyNotes) {
-        event.preventDefault();
-        playButton.click();
+      if (event.code === 'Space') {
+        // Only prevent default/play if not focused in an input or textarea
+        if (
+          document.activeElement.tagName !== 'INPUT' &&
+          document.activeElement.tagName !== 'TEXTAREA'
+        ) {
+          event.preventDefault();
+          playButton.click();
+        }
       }
-      
       // Esc key to close modal
       if (event.code === 'Escape' && vocabModal.classList.contains('active')) {
         closeVocabModal();
@@ -769,4 +708,5 @@
     });
   </script>
 </body>
+  <script src="../js/main.js"></script>
 </html>
